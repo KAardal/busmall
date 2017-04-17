@@ -31,11 +31,17 @@ function productsDisplay() {
   var products = productsArrayCreate();
   var imagesContainer = document.getElementById('images-container');
   var image = document.createElement('img');
-
-  for(var i = 0; i<3; i++) {
-    image = document.createElement('img');
-    image.setAttribute('src', products[randomNumberGenerator(products.length)].filePath);
-    imagesContainer.appendChild(image);
+  var currentProduct;
+  var i = 0;
+  while(i < 3) {
+    currentProduct = products[randomNumberGenerator(products.length)];
+    if(!currentProduct.wasDisplayed) {
+      image = document.createElement('img');
+      image.setAttribute('src', currentProduct.filePath);
+      imagesContainer.appendChild(image);
+      currentProduct.wasDisplayed = true;
+      i++;
+    }
   }
 }
 
