@@ -1,7 +1,7 @@
 'use strict';
 
 function main(){
-  productsDisplay();
+  productsDisplay(productsArrayCreate());
 }
 
 function Product(name) {
@@ -9,6 +9,16 @@ function Product(name) {
   this.filePath = 'assets/' + name;
   this.numTimesChosen = 0;
   this.wasDisplayed = false;
+}
+
+function handleProductClick(event) {
+  event.numTimesChosen += 1;
+
+  var container = document.getElementById('images-container');
+  var ul = document.getElementById('images-ul');
+  container.remove(ul);
+
+  productsDisplay();
 }
 
 function productsArrayCreate() {
@@ -27,22 +37,28 @@ function randomNumberGenerator(max) {
   return Math.floor(Math.random() * max);
 }
 
-function productsDisplay() {
-  var products = productsArrayCreate();
+function productsDisplay(products) {
   var imagesContainer = document.getElementById('images-container');
+  var imagesUl = document.createElement('ul');
+  imagesUl.setAttribute('id', 'images-ul');
+  var imagesLi = document.createElement('li');
   var image = document.createElement('img');
   var currentProduct;
   var i = 0;
   while(i < 3) {
     currentProduct = products[randomNumberGenerator(products.length)];
     if(!currentProduct.wasDisplayed) {
+      imagesLi = document.createElement('li');
       image = document.createElement('img');
       image.setAttribute('src', currentProduct.filePath);
-      imagesContainer.appendChild(image);
+      imagesLi.appendChild(image);
+      imagesUl.appendChild(imagesLi);
       currentProduct.wasDisplayed = true;
+      image.addEventListener('click', handleProductClick);
       i++;
     }
   }
+  imagesContainer.appendChild(imagesUl);
 }
 
 main();
