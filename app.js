@@ -37,27 +37,46 @@ function randomNumberGenerator(max) {
   return Math.floor(Math.random() * max);
 }
 
-function productsDisplay(products) {
-  var imagesContainer = document.getElementById('images-container');
-  var imagesUl = document.createElement('ul');
-  imagesUl.setAttribute('id', 'images-ul');
-  var imagesLi = document.createElement('li');
-  var image = document.createElement('img');
+function imageSourceSet(image, products) {
   var currentProduct;
   var i = 0;
-  while(i < 3) {
+  while(i < 1) {
     currentProduct = products[randomNumberGenerator(products.length)];
     if(!currentProduct.wasDisplayed) {
-      imagesLi = document.createElement('li');
       image = document.createElement('img');
       image.setAttribute('src', currentProduct.filePath);
-      imagesLi.appendChild(image);
-      imagesUl.appendChild(imagesLi);
       currentProduct.wasDisplayed = true;
       image.addEventListener('click', handleProductClick);
       i++;
     }
   }
+  return image;
+}
+
+function productsDisplay(products) {
+  var imagesContainer = document.getElementById('images-container');
+  var imagesUl = document.createElement('ul');
+  imagesUl.setAttribute('id', 'images-ul');
+  var imagesLi = document.createElement('li');
+  var imageOne = document.createElement('img');
+  imageOne.setAttribute('id', 'image-one');
+  var imageTwo = document.createElement('img');
+  imageTwo.setAttribute('id', 'image-two');
+  var imageThree = document.createElement('img');
+  imageThree.setAttribute('id', 'image-three');
+
+  imagesLi = document.createElement('li');
+  imagesLi.appendChild(imageSourceSet(imageOne, products));
+  imagesUl.appendChild(imagesLi);
+
+  imagesLi = document.createElement('li');
+  imagesLi.appendChild(imageSourceSet(imageTwo, products));
+  imagesUl.appendChild(imagesLi);
+
+  imagesLi = document.createElement('li');
+  imagesLi.appendChild(imageSourceSet(imageThree, products));
+  imagesUl.appendChild(imagesLi);
+
   imagesContainer.appendChild(imagesUl);
 }
 
