@@ -1,5 +1,9 @@
 'use strict';
 
+function main(){
+  productsDisplay();
+}
+
 function Product(name) {
   this.name = name;
   this.filePath = 'assets/' + name;
@@ -23,12 +27,16 @@ function randomNumberGenerator(max) {
   return Math.floor(Math.random() * max);
 }
 
-var products = productsArrayCreate();
-var imagesContainer = document.getElementById('images-container');
-var image = document.createElement('img');
+function productsDisplay() {
+  var products = productsArrayCreate();
+  var imagesContainer = document.getElementById('images-container');
+  var image = document.createElement('img');
 
-var random = randomNumberGenerator(products.length);
-console.log(random);
+  for(var i = 0; i<3; i++) {
+    image = document.createElement('img');
+    image.setAttribute('src', products[randomNumberGenerator(products.length)].filePath);
+    imagesContainer.appendChild(image);
+  }
+}
 
-image.setAttribute('src', products[random].filePath);
-imagesContainer.appendChild(image);
+main();
