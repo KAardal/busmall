@@ -16,3 +16,11 @@ img {
   width: 300px;
   height: auto;
 }
+
+li {
+  list-style-type: none;
+}
+
+#results-container {
+  clear: both;
+}
