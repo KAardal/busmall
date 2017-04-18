@@ -8,3 +8,11 @@
 html, body {
   height: 100%;
 }
+
+img {
+  display: inline-block;
+  float: left;
+  margin: 0 auto;
+  width: 300px;
+  height: auto;
+}
