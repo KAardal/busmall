@@ -15,8 +15,9 @@ function Product(name) {
 }
 
 function handleProductClick(event) {
-  if(clicks < 25){
-    event.numTimesChosen += 1;
+  if(clicks < 5){
+
+    console.log(event.target.id);
     wasDisplayedReset();
 
     var imgOne = document.getElementById('image-one');
@@ -34,7 +35,23 @@ function handleProductClick(event) {
 }
 
 function tableDataGenerate() {
-
+  var div = document.getElementById('table-container');
+  var tr;
+  var td;
+  var i = 0;
+  while(i < products.length) {
+    tr = document.createElement('tr');
+    td = document.createElement('td');
+    td.textContent = products[i].name;
+    tr.appendChild(td);
+    for(var j = 0; j < 2; j++) {
+      td = document.createElement('td');
+      td.textContent = products[i].numTimesChosen;
+      tr.appendChild(td);
+    }
+    div.appendChild(tr);
+    i++;
+  }
 }
 
 function productsArrayCreate() {
@@ -50,9 +67,11 @@ function imageSourceSet(image) {
   var currentProduct;
   var i = 0;
   while(i < 1) {
-    currentProduct = products[randomNumberGenerator(products.length)];
+    var rand = randomNumberGenerator(products.length);
+    currentProduct = products[rand];
     if(!currentProduct.wasDisplayed) {
       image.setAttribute('src', currentProduct.filePath);
+      image.setAttribute('xml:id', rand);
       currentProduct.wasDisplayed = true;
       image.addEventListener('click', handleProductClick);
       i++;
@@ -85,19 +104,21 @@ function productsDisplay() {
   var imageThree = document.createElement('img');
   imageThree.setAttribute('id', 'image-three');
 
-  imagesLi = document.createElement('li');
-  imagesLi.appendChild(imageSourceSet(imageOne));
-  imagesUl.appendChild(imagesLi);
+  var imagesLiOne = document.createElement('li');
+  imagesLiOne.appendChild(imageSourceSet(imageOne));
+  imagesUl.appendChild(imagesLiOne);
 
-  imagesLi = document.createElement('li');
-  imagesLi.appendChild(imageSourceSet(imageTwo));
-  imagesUl.appendChild(imagesLi);
+  var imagesLiTwo = document.createElement('li');
+  imagesLiTwo.appendChild(imageSourceSet(imageTwo));
+  imagesUl.appendChild(imagesLiTwo);
 
-  imagesLi = document.createElement('li');
-  imagesLi.appendChild(imageSourceSet(imageThree));
-  imagesUl.appendChild(imagesLi);
+  var imagesLiThree = document.createElement('li');
+  imagesLiThree.appendChild(imageSourceSet(imageThree));
+  imagesUl.appendChild(imagesLiThree);
 
   imagesContainer.appendChild(imagesUl);
+
+  //imagesUl.addEventListener('click', handleProductClick);
 }
 
 function randomNumberGenerator(max) {
