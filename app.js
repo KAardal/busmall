@@ -44,7 +44,7 @@ function tableDataGenerate() {
     td = document.createElement('td');
     td.textContent = products[i].name;
     tr.appendChild(td);
-    for(var j = 0; j < 2; j++) {
+    for(var j = 0; j < 1; j++) {
       td = document.createElement('td');
       td.textContent = products[i].numTimesChosen;
       tr.appendChild(td);
