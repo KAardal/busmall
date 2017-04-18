@@ -1,6 +1,7 @@
 'use strict';
 
 var products = [];
+var clicks = 0;
 
 function main(){
   productsDisplay(productsArrayCreate());
@@ -14,17 +15,25 @@ function Product(name) {
 }
 
 function handleProductClick(event) {
-  event.numTimesChosen += 1;
-  wasDisplayedReset();
+  if(clicks < 25){
+    event.numTimesChosen += 1;
+    wasDisplayedReset();
 
-  var imgOne = document.getElementById('image-one');
-  imageSourceSet(imgOne);
+    var imgOne = document.getElementById('image-one');
+    imageSourceSet(imgOne);
 
-  var imgTwo = document.getElementById('image-two');
-  imageSourceSet(imgTwo);
+    var imgTwo = document.getElementById('image-two');
+    imageSourceSet(imgTwo);
 
-  var imgThree = document.getElementById('image-three');
-  imageSourceSet(imgThree);
+    var imgThree = document.getElementById('image-three');
+    imageSourceSet(imgThree);
+    clicks++;
+  } else {
+    tableDataGenerate();
+  }
+}
+
+function tableDataGenerate() {
 
 }
 
@@ -35,10 +44,6 @@ function productsArrayCreate() {
     console.log(imageNames[i]);
     products.push(new Product(imageNames[i]));
   }
-}
-
-function randomNumberGenerator(max) {
-  return Math.floor(Math.random() * max);
 }
 
 function imageSourceSet(image) {
@@ -69,6 +74,7 @@ function productsDisplay() {
   imagesUl.setAttribute('id', 'images-ul');
 
   var imagesLi = document.createElement('li');
+  imagesLi.setAttribute('id', 'images-li');
 
   var imageOne = document.createElement('img');
   imageOne.setAttribute('id', 'image-one');
@@ -92,6 +98,10 @@ function productsDisplay() {
   imagesUl.appendChild(imagesLi);
 
   imagesContainer.appendChild(imagesUl);
+}
+
+function randomNumberGenerator(max) {
+  return Math.floor(Math.random() * max);
 }
 
 main();
