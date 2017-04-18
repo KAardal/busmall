@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 5;
+var clicksRemaining = 25;
 
 function main(){
 
@@ -57,7 +57,7 @@ function handleProductClick(event) {
   } else {
     products = products.concat(productsCurrent);
     products = products.concat(productsLast);
-    console.log(products);
+    getResults();
   }
 }
 
@@ -106,6 +106,20 @@ function setSource(list, num){
   image.setAttribute('src', list[num].filePath);
   image.setAttribute('alt', list[num].name);
   return image;
+}
+
+function getResults() {
+
+  var resultsContainer = document.getElementById('results-container');
+  var resultsUl = document.createElement('ul');
+  resultsUl.setAttribute('id', 'results-ul');
+  var resultsLi;
+  for(var i = 0; i < products.length; i++) {
+    resultsLi = document.createElement('li');
+    resultsLi.textContent = products[i].timesChosen + ' votes for ' + products[i].name;
+    resultsUl.appendChild(resultsLi);
+  }
+  resultsContainer.appendChild(resultsUl);
 }
 
 main();
