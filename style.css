@@ -9,6 +9,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  width: 960px;
+}
+
 img {
   display: inline-block;
   float: left;
@@ -23,4 +27,5 @@ li {
 
 #results-container {
   clear: both;
+  height: 60%;
 }
