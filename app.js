@@ -70,6 +70,7 @@ function imageSourceSet(image) {
     var rand = randomNumberGenerator(products.length);
     currentProduct = products[rand];
     if(!currentProduct.wasDisplayed) {
+      products[rand].numTimesChosen++;
       image.setAttribute('src', currentProduct.filePath);
       image.setAttribute('xml:id', rand);
       currentProduct.wasDisplayed = true;
@@ -117,8 +118,6 @@ function productsDisplay() {
   imagesUl.appendChild(imagesLiThree);
 
   imagesContainer.appendChild(imagesUl);
-
-  //imagesUl.addEventListener('click', handleProductClick);
 }
 
 function randomNumberGenerator(max) {
