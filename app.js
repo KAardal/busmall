@@ -48,6 +48,7 @@ function randomNumberGenerator(max) {
 }
 
 function handleProductClick(event) {
+  
   if(clicksRemaining > 0){
     productsCurrent[parseInt(event.target.id)].timesChosen++;
     var el = document.getElementById('images-container');
