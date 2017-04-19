@@ -131,6 +131,42 @@ function getResults() {
 
         ],
         borderWidth: 1
+      },
+      {
+        label: '% of votes',
+        data: [
+          (products[0].timesChosen / products[0].timesDisplayed) * 100,
+          (products[1].timesChosen / products[1].timesDisplayed) * 100,
+          (products[2].timesChosen / products[2].timesDisplayed) * 100,
+          (products[3].timesChosen / products[3].timesDisplayed) * 100,
+          (products[4].timesChosen / products[4].timesDisplayed) * 100,
+
+          (products[5].timesChosen / products[5].timesDisplayed) * 100,
+          (products[6].timesChosen / products[6].timesDisplayed) * 100,
+          (products[7].timesChosen / products[7].timesDisplayed) * 100,
+          (products[8].timesChosen / products[8].timesDisplayed) * 100,
+          (products[9].timesChosen / products[9].timesDisplayed) * 100,
+
+          (products[10].timesChosen / products[10].timesDisplayed) * 100,
+          (products[11].timesChosen / products[11].timesDisplayed) * 100,
+          (products[12].timesChosen / products[12].timesDisplayed) * 100,
+          (products[13].timesChosen / products[13].timesDisplayed) * 100,
+          (products[14].timesChosen / products[14].timesDisplayed) * 100,
+
+          (products[15].timesChosen / products[15].timesDisplayed) * 100,
+          (products[16].timesChosen / products[16].timesDisplayed) * 100,
+          (products[17].timesChosen / products[17].timesDisplayed) * 100,
+          (products[18].timesChosen / products[18].timesDisplayed) * 100,
+          (products[19].timesChosen / products[19].timesDisplayed) * 100,],
+        backgroundColor: [
+          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762', '#004D43', '#8FB0FF', '#997D87',
+          '#5A0007', '#809693', '#FEFFE6', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53', '#FF2F80',
+          '#61615A', '#BA0900', '#6B7900', '#00C2A0', '#FFAA92',
+        ],
+        borderColor: [
+
+        ],
+        borderWidth: 1
       }]
     },
     options: {
