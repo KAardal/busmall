@@ -3,36 +3,41 @@
 var clicksRemaining = 5;
 var productsCurrent = [];
 var productsLast = [];
-var products = [
-
-  new Product('bag', 'bag.jpg'),
-  new Product('banana', 'banana.jpg'),
-  new Product('bathroom', 'bathroom.jpg'),
-  new Product('boots', 'boots.jpg'),
-  new Product('breakfast', 'breakfast.jpg'),
-  new Product('bubblegum', 'bubblegum.jpg'),
-  new Product('chair', 'chair.jpg'),
-  new Product('cthulhu', 'cthulhu.jpg'),
-  new Product('dog-duck', 'dog-duck.jpg'),
-  new Product('dragon', 'dragon.jpg'),
-  new Product('pen', 'pen.jpg'),
-  new Product('pet-sweep', 'pet-sweep.jpg'),
-  new Product('scissors', 'scissors.jpg'),
-  new Product('shark', 'shark.jpg'),
-  new Product('sweep', 'sweep.png'),
-  new Product('tauntuan', 'tauntaun.jpg'),
-  new Product('unicorn', 'unicorn.jpg'),
-  new Product('usb', 'usb.gif'),
-  new Product('water-can', 'water-can.jpg'),
-  new Product('wine-glass', 'wine-glass.jpg'),
-];
+var products = [];
 
 function main(){
 
-  try{
-    products = JSON.parse(localStorage.product);
-  } catch(e) {
-    //do nothing
+  if(!localStorage.products) {
+    products = [
+
+      new Product('bag', 'bag.jpg'),
+      new Product('banana', 'banana.jpg'),
+      new Product('bathroom', 'bathroom.jpg'),
+      new Product('boots', 'boots.jpg'),
+      new Product('breakfast', 'breakfast.jpg'),
+      new Product('bubblegum', 'bubblegum.jpg'),
+      new Product('chair', 'chair.jpg'),
+      new Product('cthulhu', 'cthulhu.jpg'),
+      new Product('dog-duck', 'dog-duck.jpg'),
+      new Product('dragon', 'dragon.jpg'),
+      new Product('pen', 'pen.jpg'),
+      new Product('pet-sweep', 'pet-sweep.jpg'),
+      new Product('scissors', 'scissors.jpg'),
+      new Product('shark', 'shark.jpg'),
+      new Product('sweep', 'sweep.png'),
+      new Product('tauntuan', 'tauntaun.jpg'),
+      new Product('unicorn', 'unicorn.jpg'),
+      new Product('usb', 'usb.gif'),
+      new Product('water-can', 'water-can.jpg'),
+      new Product('wine-glass', 'wine-glass.jpg'),
+    ];
+  } else {
+
+    try{
+      products = JSON.parse(localStorage.products);
+    } catch(e) {
+      //do nothing
+    }
   }
   getImages();
 }
@@ -68,7 +73,7 @@ function handleProductClick(event) {
     products = products.concat(productsCurrent);
     products = products.concat(productsLast);
     try{
-      localStorage.setItem(JSON.stringify(products));
+      localStorage.setItem('products', JSON.stringify(products));
     } catch (e) {
       //do nothing
     }
