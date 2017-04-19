@@ -1,20 +1,8 @@
 'use strict';
 
-var clicksRemaining = 25;
-
-function main(){
-
-  getImages();
-}
-
-function Product(name, filePath) {
-
-  this.name = name;
-  this.filePath = 'assets/' + filePath;
-  this.timesChosen = 0;
-  this.timesDisplayed = 0;
-}
-
+var clicksRemaining = 5;
+var productsCurrent = [];
+var productsLast = [];
 var products = [
 
   new Product('bag', 'bag.jpg'),
@@ -39,8 +27,25 @@ var products = [
   new Product('wine-glass', 'wine-glass.jpg'),
 ];
 
-var productsCurrent = [];
-var productsLast = [];
+function main(){
+
+  try{
+    products = JSON.parse(localStorage.product);
+  } catch(e) {
+    //do nothing
+  }
+  getImages();
+}
+
+function Product(name, filePath) {
+
+  this.name = name;
+  this.filePath = 'assets/' + filePath;
+  this.timesChosen = 0;
+  this.timesDisplayed = 0;
+}
+
+
 
 function randomNumberGenerator(max) {
 
@@ -49,12 +54,12 @@ function randomNumberGenerator(max) {
 
 function handleProductClick(event) {
 
+  var el = document.getElementById('images-container');
+  el.textContent = '';
+
   if(clicksRemaining > 0){
 
-    productsCurrent[parseInt(event.target.id)].timesChosen++;
-
-    var el = document.getElementById('images-container');
-    el.textContent = '';
+    productsCurrent[event.target.id].timesChosen++;
 
     clicksRemaining--;
     getImages();
@@ -62,6 +67,12 @@ function handleProductClick(event) {
 
     products = products.concat(productsCurrent);
     products = products.concat(productsLast);
+    try{
+      localStorage.setItem(JSON.stringify(products));
+    } catch (e) {
+      //do nothing
+    }
+
     getResults();
   }
 }
@@ -118,68 +129,42 @@ function setSource(list, num){
 function getResults() {
 
   var ctx = document.getElementById('results-chart');
-  var resultsChart = new Chart(ctx, {
+  var resultsChart = {
 
-    type: 'bar',
+    labels: [],
 
-    data: {
-      labels: [products[0].name, products[1].name, products[2].name, products[3].name, products[4].name, products[5].name, products[6].name, products[7].name, products[8].name, products[9].name, products[10].name, products[11].name, products[12].name, products[13].name, products[14].name, products[15].name, products[16].name, products[17].name, products[18].name, products[19].name,],
+    datasets: [{
+      label: '# of Votes',
 
-      datasets: [{
-        label: '# of Votes',
+      data: [],
 
-        data: [products[0].timesChosen, products[1].timesChosen, products[2].timesChosen, products[3].timesChosen, products[4].timesChosen, products[5].timesChosen, products[6].timesChosen, products[7].timesChosen, products[8].timesChosen, products[9].timesChosen, products[10].timesChosen, products[11].timesChosen, products[12].timesChosen, products[13].timesChosen, products[14].timesChosen, products[15].timesChosen, products[16].timesChosen, products[17].timesChosen, products[18].timesChosen, products[19].timesChosen,],
+      backgroundColor: [
+        '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762',
+        '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693',
+        '#FFAA92', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53',
+        '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0'],
 
-        backgroundColor: [
-          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762',
-          '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693',
-          '#FFAA92', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53',
-          '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0'],
+      borderColor: [],
 
-        borderColor: [],
-
-        borderWidth: 1,
-      },
-
-      {
-        label: '% of votes',
-
-        data: [
-          (products[0].timesChosen / products[0].timesDisplayed) * 100,
-          (products[1].timesChosen / products[1].timesDisplayed) * 100,
-          (products[2].timesChosen / products[2].timesDisplayed) * 100,
-          (products[3].timesChosen / products[3].timesDisplayed) * 100,
-          (products[4].timesChosen / products[4].timesDisplayed) * 100,
-
-          (products[5].timesChosen / products[5].timesDisplayed) * 100,
-          (products[6].timesChosen / products[6].timesDisplayed) * 100,
-          (products[7].timesChosen / products[7].timesDisplayed) * 100,
-          (products[8].timesChosen / products[8].timesDisplayed) * 100,
-          (products[9].timesChosen / products[9].timesDisplayed) * 100,
-
-          (products[10].timesChosen / products[10].timesDisplayed) * 100,
-          (products[11].timesChosen / products[11].timesDisplayed) * 100,
-          (products[12].timesChosen / products[12].timesDisplayed) * 100,
-          (products[13].timesChosen / products[13].timesDisplayed) * 100,
-          (products[14].timesChosen / products[14].timesDisplayed) * 100,
-
-          (products[15].timesChosen / products[15].timesDisplayed) * 100,
-          (products[16].timesChosen / products[16].timesDisplayed) * 100,
-          (products[17].timesChosen / products[17].timesDisplayed) * 100,
-          (products[18].timesChosen / products[18].timesDisplayed) * 100,
-          (products[19].timesChosen / products[19].timesDisplayed) * 100,],
-
-        backgroundColor: [
-          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762',
-          '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693',
-          '#FFAA92', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53',
-          '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0'],
-
-        borderColor: [],
-
-        borderWidth: 1,
-      }]
+      borderWidth: 1,
     },
+
+    {
+      label: '% of votes',
+
+      data: [],
+
+      backgroundColor: [
+        '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762',
+        '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693',
+        '#FFAA92', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53',
+        '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0'],
+
+      borderColor: [],
+
+      borderWidth: 1,
+    }],
+
     options: {
       scales: {
         yAxes: [{
@@ -189,6 +174,19 @@ function getResults() {
         }]
       }
     }
+  };
+
+  var currentPhoto;
+  for(var i=0; i< products.length; i++){
+    currentPhoto = products[i];
+    resultsChart.labels.push(currentPhoto.name);
+    resultsChart.datasets[0].data.push(currentPhoto.timesChosen);
+    resultsChart.datasets[1].data.push((currentPhoto.timesChosen/currentPhoto.timesDisplayed)*100);
+  }
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: resultsChart,
   });
 }
 
