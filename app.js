@@ -131,10 +131,10 @@ function getResults() {
         data: [products[0].timesChosen, products[1].timesChosen, products[2].timesChosen, products[3].timesChosen, products[4].timesChosen, products[5].timesChosen, products[6].timesChosen, products[7].timesChosen, products[8].timesChosen, products[9].timesChosen, products[10].timesChosen, products[11].timesChosen, products[12].timesChosen, products[13].timesChosen, products[14].timesChosen, products[15].timesChosen, products[16].timesChosen, products[17].timesChosen, products[18].timesChosen, products[19].timesChosen,],
 
         backgroundColor: [
-          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762', '#004D43', '#8FB0FF', '#997D87',
-          '#5A0007', '#809693', '#FEFFE6', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53', '#FF2F80',
-          '#61615A', '#BA0900', '#6B7900', '#00C2A0', '#FFAA92',
-        ],
+          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762',
+          '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693',
+          '#FFAA92', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53',
+          '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0'],
 
         borderColor: [],
 
@@ -170,7 +170,10 @@ function getResults() {
           (products[19].timesChosen / products[19].timesDisplayed) * 100,],
 
         backgroundColor: [
-          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762', '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693', '#FEFFE6', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53', '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0', '#FFAA92'],
+          '#FFDBE5', '#7A4900', '#0000A6', '#63FFAC', '#B79762',
+          '#004D43', '#8FB0FF', '#997D87', '#5A0007', '#809693',
+          '#FFAA92', '#1B4400', '#4FC601', '#3B5DFF', '#4A3B53',
+          '#FF2F80', '#61615A', '#BA0900', '#6B7900', '#00C2A0'],
 
         borderColor: [],
 
