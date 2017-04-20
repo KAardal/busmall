@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 5;
+var clicksRemaining = 25;
 var productsCurrent = [];
 var productsLast = [];
 var products = [];
@@ -123,9 +123,11 @@ function setSource(list, num){
 
 function getResults() {
 
+  var el = document.getElementById('message');
+  el.textContent = 'Here are your results!';
+
   products = products.concat(productsCurrent);
   products = products.concat(productsLast);
-  products.sort();
 
   try{
     localStorage.setItem('products', JSON.stringify(products));
