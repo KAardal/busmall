@@ -11,6 +11,8 @@ html, body {
 
 body {
   width: 960px;
+  margin: 0 auto;
+  border: 2px dotted blue;
 }
 
 img {
@@ -25,7 +27,21 @@ li {
   list-style-type: none;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 6%;
+}
+
+.container {
+  border: 2px dotted green;
+}
+
+#heading {
+  height: 15%;
+  border: 2px dotted red;
+}
+
 #results-container {
   clear: both;
-  height: 60%;
+  height: 50%;
 }
