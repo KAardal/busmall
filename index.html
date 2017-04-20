@@ -2,17 +2,22 @@
 <html>
   <head>
     <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js">
     </script>
   </head>
   <body>
-    <div id="heading" class="container">
-      <h1>BusMall Products<h1>
-    </div>
-    <div id="images-container" class="container">
-    </div>
-    <div id="results-container" class="container">
-      <canvas id="results-chart" width="300px" height="300px"></canvas>
+    <div class="nav-bar"></div>
+    <div id="outer-container" class="container">
+      <div id="heading" class="container">
+        <h1>BusMall Products<h1>
+      </div>
+      <div id="images-container" class="container">
+      </div>
+      <div id="message-container" class="container"><h2 id="message">Help us bring you better products by selecting your favorite from the items above.</h2></div>
+      <div id="results-container" class="container">
+        <canvas id="results-chart" width="300px" height="300px"></canvas>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>

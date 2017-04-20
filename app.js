@@ -73,7 +73,7 @@ function handleProductClick(event) {
 
     products = products.concat(productsCurrent);
     products = products.concat(productsLast);
-    
+
     try{
       localStorage.setItem('products', JSON.stringify(products));
     } catch (e) {
@@ -115,19 +115,19 @@ function imageDisplay(list) {
     imagesLi = document.createElement('li');
     image = setSource(list, i);
     imagesLi.addEventListener('click', handleProductClick);
-
     imagesLi.appendChild(image);
     imagesUl.appendChild(imagesLi);
     productsCurrent[i].timesDisplayed++;
   }
-
   imagesContainer.appendChild(imagesUl);
+
 }
 
 function setSource(list, num){
 
   var image = document.createElement('img');
   image.setAttribute('id', num);
+  image.setAttribute('class', 'grow');
   image.setAttribute('src', list[num].filePath);
   image.setAttribute('alt', list[num].name);
   return image;
