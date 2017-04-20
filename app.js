@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 25;
+var clicksRemaining = 5;
 var productsCurrent = [];
 var productsLast = [];
 var products = [];
@@ -33,7 +33,11 @@ function main(){
     ];
   } else {
 
-    products = JSON.parse(localStorage.products);
+    try{
+      products = JSON.parse(localStorage.products);
+    } catch(e) {
+      //do nothing
+    }
   }
 
   getImages();
@@ -69,8 +73,12 @@ function handleProductClick(event) {
 
     products = products.concat(productsCurrent);
     products = products.concat(productsLast);
-
-    localStorage.setItem('products', JSON.stringify(products));
+    
+    try{
+      localStorage.setItem('products', JSON.stringify(products));
+    } catch (e) {
+      //do nothing
+    }
 
     getResults();
   }
