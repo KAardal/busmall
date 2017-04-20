@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 5;
+var clicksRemaining = 25;
 var productsCurrent = [];
 var productsLast = [];
 var products = [];
@@ -63,43 +63,32 @@ function handleProductClick(event) {
   var el = document.getElementById('images-container');
   el.textContent = '';
 
-  if(clicksRemaining > 0){
+  productsCurrent[event.target.id].timesChosen++;
+  clicksRemaining--;
 
-    productsCurrent[event.target.id].timesChosen++;
-
-    clicksRemaining--;
-    getImages();
-  } else {
-
-    products = products.concat(productsCurrent);
-    products = products.concat(productsLast);
-    
-    try{
-      localStorage.setItem('products', JSON.stringify(products));
-    } catch (e) {
-      //do nothing
-    }
-
-    getResults();
-  }
+  getImages();
 }
 
 function getImages() {
 
-  products = products.concat(productsLast);
-  productsLast = productsCurrent;
-  productsCurrent = [];
+  if(clicksRemaining > 0) {
+    products = products.concat(productsLast);
+    productsLast = productsCurrent;
+    productsCurrent = [];
 
-  var image = products.splice(randomNumberGenerator(products), 1);
-  productsCurrent = productsCurrent.concat(image);
+    var image = products.splice(randomNumberGenerator(products), 1);
+    productsCurrent = productsCurrent.concat(image);
 
-  image = products.splice(randomNumberGenerator(products), 1);
-  productsCurrent = productsCurrent.concat(image);
+    image = products.splice(randomNumberGenerator(products), 1);
+    productsCurrent = productsCurrent.concat(image);
 
-  image = products.splice(randomNumberGenerator(products), 1);
-  productsCurrent = productsCurrent.concat(image);
+    image = products.splice(randomNumberGenerator(products), 1);
+    productsCurrent = productsCurrent.concat(image);
 
-  imageDisplay(productsCurrent);
+    imageDisplay(productsCurrent);
+  } else {
+    getResults();
+  }
 }
 
 function imageDisplay(list) {
@@ -115,13 +104,12 @@ function imageDisplay(list) {
     imagesLi = document.createElement('li');
     image = setSource(list, i);
     imagesLi.addEventListener('click', handleProductClick);
-
     imagesLi.appendChild(image);
     imagesUl.appendChild(imagesLi);
     productsCurrent[i].timesDisplayed++;
   }
-
   imagesContainer.appendChild(imagesUl);
+
 }
 
 function setSource(list, num){
@@ -134,6 +122,18 @@ function setSource(list, num){
 }
 
 function getResults() {
+
+  var el = document.getElementById('message');
+  el.textContent = 'Here are your results!';
+
+  products = products.concat(productsCurrent);
+  products = products.concat(productsLast);
+
+  try{
+    localStorage.setItem('products', JSON.stringify(products));
+  } catch (e) {
+    //do nothing
+  }
 
   var ctx = document.getElementById('results-chart');
   var resultsChart = {
