@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 5;
+var clicksRemaining = 25;
 var productsCurrent = [];
 var productsLast = [];
 var products = [];
