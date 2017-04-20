@@ -63,43 +63,42 @@ function handleProductClick(event) {
   var el = document.getElementById('images-container');
   el.textContent = '';
 
-  if(clicksRemaining > 0){
+  // if(clicksRemaining > 0){
 
-    productsCurrent[event.target.id].timesChosen++;
+  productsCurrent[event.target.id].timesChosen++;
 
-    clicksRemaining--;
-    getImages();
-  } else {
-
-    products = products.concat(productsCurrent);
-    products = products.concat(productsLast);
-
-    try{
-      localStorage.setItem('products', JSON.stringify(products));
-    } catch (e) {
-      //do nothing
-    }
-
-    getResults();
-  }
+  clicksRemaining--;
+  getImages();
+  // } else {
+  //
+  //   productsCurrent[event.target.id].timesChosen++;
+  //   clicksRemaining--;
+  //   getImages();
+  //
+  //   getResults();
+  // }
 }
 
 function getImages() {
 
-  products = products.concat(productsLast);
-  productsLast = productsCurrent;
-  productsCurrent = [];
+  if(clicksRemaining > 0) {
+    products = products.concat(productsLast);
+    productsLast = productsCurrent;
+    productsCurrent = [];
 
-  var image = products.splice(randomNumberGenerator(products), 1);
-  productsCurrent = productsCurrent.concat(image);
+    var image = products.splice(randomNumberGenerator(products), 1);
+    productsCurrent = productsCurrent.concat(image);
 
-  image = products.splice(randomNumberGenerator(products), 1);
-  productsCurrent = productsCurrent.concat(image);
+    image = products.splice(randomNumberGenerator(products), 1);
+    productsCurrent = productsCurrent.concat(image);
 
-  image = products.splice(randomNumberGenerator(products), 1);
-  productsCurrent = productsCurrent.concat(image);
+    image = products.splice(randomNumberGenerator(products), 1);
+    productsCurrent = productsCurrent.concat(image);
 
-  imageDisplay(productsCurrent);
+    imageDisplay(productsCurrent);
+  } else {
+    getResults();
+  }
 }
 
 function imageDisplay(list) {
@@ -127,13 +126,21 @@ function setSource(list, num){
 
   var image = document.createElement('img');
   image.setAttribute('id', num);
-  image.setAttribute('class', 'grow');
   image.setAttribute('src', list[num].filePath);
   image.setAttribute('alt', list[num].name);
   return image;
 }
 
 function getResults() {
+
+  products = products.concat(productsCurrent);
+  products = products.concat(productsLast);
+
+  try{
+    localStorage.setItem('products', JSON.stringify(products));
+  } catch (e) {
+    //do nothing
+  }
 
   var ctx = document.getElementById('results-chart');
   var resultsChart = {
