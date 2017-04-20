@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 5;
+var clicksRemaining = 25;
 var productsCurrent = [];
 var productsLast = [];
 var products = [];
@@ -63,20 +63,10 @@ function handleProductClick(event) {
   var el = document.getElementById('images-container');
   el.textContent = '';
 
-  // if(clicksRemaining > 0){
-
   productsCurrent[event.target.id].timesChosen++;
-
   clicksRemaining--;
+  
   getImages();
-  // } else {
-  //
-  //   productsCurrent[event.target.id].timesChosen++;
-  //   clicksRemaining--;
-  //   getImages();
-  //
-  //   getResults();
-  // }
 }
 
 function getImages() {
