@@ -4,6 +4,9 @@ var clicksRemaining = 25;
 var productsCurrent = [];
 var productsLast = [];
 var products = [];
+var navBar = document.getElementById('nav-bar');
+var hamburger = document.getElementById('hamburger-icon');
+var clearData = document.getElementById('clear-data');
 
 function main(){
 
@@ -60,7 +63,7 @@ function randomNumberGenerator(max) {
 
 function handleProductClick(event) {
 
-  var el = document.getElementById('images-container');
+  var el = document.getElementById('images-container-visible');
   el.textContent = '';
 
   productsCurrent[event.target.id].timesChosen++;
@@ -69,7 +72,24 @@ function handleProductClick(event) {
   getImages();
 }
 
+function handleHamburgerClick() {
+
+  if(navBar.className == 'nav-bar-hidden') {
+    navBar.className = 'nav-bar';
+  } else {
+    navBar.className = 'nav-bar-hidden';
+  }
+}
+
+function handleClearDataClick() {
+  localStorage.clear();
+  location.reload();
+}
+
 function getImages() {
+
+  hamburger.addEventListener('click', handleHamburgerClick);
+  clearData.addEventListener('click', handleClearDataClick);
 
   if(clicksRemaining > 0) {
     products = products.concat(productsLast);
@@ -93,7 +113,7 @@ function getImages() {
 
 function imageDisplay(list) {
 
-  var imagesContainer = document.getElementById('images-container');
+  var imagesContainer = document.getElementById('images-container-visible');
   var imagesUl = document.createElement('ul');
   imagesUl.setAttribute('id', 'images-ul');
 
@@ -125,6 +145,9 @@ function getResults() {
 
   var el = document.getElementById('message');
   el.textContent = 'Here are your results!';
+
+  el = document.getElementById('images-container-visible');
+  el.setAttribute('id', 'images-container-hidden');
 
   products = products.concat(productsCurrent);
   products = products.concat(productsLast);
