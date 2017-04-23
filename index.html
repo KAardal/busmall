@@ -7,12 +7,24 @@
     </script>
   </head>
   <body>
-    <div class="nav-bar"></div>
+    <div id="nav-bar" class="nav-bar-hidden">
+      <nav>
+        <ul>
+          <li> <a href="index.html">Restart</a></li>
+          <li> <a href="#" id="clear-data">Clear Data</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger-icon" class="hamburger-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <div id="outer-container" class="container">
       <div id="heading" class="container">
         <h1>BusMall<h1>
       </div>
-      <div id="images-container" class="container">
+      <div id="images-container-visible" class="container">
       </div>
       <div id="message-container" class="container"><h2 id="message">Help us bring you better products by selecting your favorite from the items above.</h2></div>
       <div id="results-container" class="container">
